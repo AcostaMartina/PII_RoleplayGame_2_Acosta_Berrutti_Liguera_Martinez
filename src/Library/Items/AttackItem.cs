@@ -1,6 +1,6 @@
 namespace Ucu.Poo.RoleplayGame;
 
-public class AttackItem
+public class AttackItem : IItem
 {
     private string _name;
     private int _attack;
