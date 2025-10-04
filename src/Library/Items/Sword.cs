@@ -1,5 +1,4 @@
 namespace Ucu.Poo.RoleplayGame;
-
 public class Sword: AttackItem
 {
     public Sword() : base("Sword", 20, false)
