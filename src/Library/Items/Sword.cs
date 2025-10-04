@@ -1,12 +1,12 @@
 namespace Ucu.Poo.RoleplayGame;
 
-public class Sword
+public class Sword: AttackItem
 {
-    public int AttackValue 
+    public Sword() : base("Sword", 20, false)
+    {}
+   
+    public override string ToString()
     {
-        get
-        {
-            return 20;
-        } 
+        return $"{base.ToString()}, Attack Value: {15}";
     }
 }
