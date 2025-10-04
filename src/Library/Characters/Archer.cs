@@ -64,6 +64,7 @@ public class Archer : ICharacter
         }
     }
 
+    
     public void Damage(int power)
     {
         if (this.GetArmor() < power)
