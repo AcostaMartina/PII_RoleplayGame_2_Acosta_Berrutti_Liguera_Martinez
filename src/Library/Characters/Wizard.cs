@@ -1,6 +1,6 @@
 namespace Ucu.Poo.RoleplayGame;
 
-public class Wizard
+public class Wizard : ICharacter
 {
     private int health = 100;
 
@@ -11,25 +11,47 @@ public class Wizard
 
     public string Name { get; set; }
 
-    public SpellsBook SpellsBook { get; set; }
-
-    public Staff Staff { get; set; }
-
-    public int AttackValue
+    private List<IItem> _items = new List<IItem>();
+    private SpellsBook _spellsBook = new SpellsBook();
+    
+    public void AddItem(IItem item)
     {
-        get
-        {
-            return SpellsBook.AttackValue + Staff.AttackValue;
-        }
+        if (item.IsMagical)
+            _items.Add(item);
     }
 
-    public int DefenseValue
+    public void RemoveItem(IItem item)
     {
-        get
-        {
-            return SpellsBook.DefenseValue + Staff.DefenseValue;
-        }
+        _items.Remove(item);
     }
+
+    public int GetAttack()
+    {
+        int total = 0;
+        foreach (var item in _items)
+        {
+            if (item is AttackItem atk)
+                total += atk.Attack;
+            if (item is HybridItem hyb)
+                total += hyb.Attack;
+        }
+        return total;
+    }
+
+
+    public int GetArmor()
+    {
+        int total = 0;
+        foreach (var item in _items)
+        {
+            if (item is DefenceItem dfc)
+                total += dfc.Armor;
+            if (item is HybridItem hyb)
+                total += hyb.Armor;
+        }
+        return total;
+    }
+
 
     public int Health
     {
@@ -43,15 +65,15 @@ public class Wizard
         }
     }
 
-    public void ReceiveAttack(int power)
+    public void Damage(int power)
     {
-        if (this.DefenseValue < power)
+        if (this.GetArmor() < power)
         {
-            this.Health -= power - this.DefenseValue;
+            this.Health -= power - this.GetArmor();
         }
     }
 
-    public void Cure()
+    public void Heal()
     {
         this.Health = 100;
     }

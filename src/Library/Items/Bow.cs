@@ -1,11 +1,8 @@
 namespace Ucu.Poo.RoleplayGame;
 public class Bow : AttackItem
 {
-    public Bow() : base("Bow", 15, false)
-    {}
-
-    public override string ToString()
+    public Bow(string name, int attack, bool isMagical)
+        : base("bow", 15, false) 
     {
-        return $"{base.ToString()}, Attack Value: {15}";
     }
 }
