@@ -1,32 +1,45 @@
-namespace Ucu.Poo.RoleplayGame;
-
-public class SpellsBook
+namespace Ucu.Poo.RoleplayGame
 {
-    public Spell[] Spells { get; set; }
-    
-    public int AttackValue
+    public class SpellsBook : HybridItem
     {
-        get
-        {
-            int value = 0;
-            foreach (Spell spell in this.Spells)
-            {
-                value += spell.AttackValue;
-            }
-            return value;
-        }
-    }
+        public Spell[] Spells { get; set; }
 
-    public int DefenseValue
-    {
-        get
+        public SpellsBook(Spell[] spells)
+            : base("SpellBook", armor: 0, attack: 0, isMagical: true)
         {
-            int value = 0;
-            foreach (Spell spell in this.Spells)
+            this.Spells = spells;
+        }
+
+        public override int Attack
+        {
+            get
             {
-                value += spell.DefenseValue;
+                int value = 0;
+                if (Spells != null)
+                {
+                    foreach (var spell in Spells)
+                    {
+                        value += spell.AttackValue;
+                    }
+                }
+                return value;
             }
-            return value;
+        }
+
+        public override int Armor
+        {
+            get
+            {
+                int value = 0;
+                if (Spells != null)
+                {
+                    foreach (var spell in Spells)
+                    {
+                        value += spell.DefenseValue;
+                    }
+                }
+                return value;
+            }
         }
     }
 }
