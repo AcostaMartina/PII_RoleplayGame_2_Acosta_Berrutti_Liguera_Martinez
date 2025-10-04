@@ -1,4 +1,4 @@
-namespace Characters;
+namespace Ucu.Poo.RoleplayGame;
 
 public class Archer : ICharacter
 {
@@ -11,15 +11,15 @@ public class Archer : ICharacter
 
     public string Name { get; set; }
 
-    private List<Item> _items = new List<Item>();
+    private List<IItem> _items = new List<IItem>();
     
-    public void AddItem(Item item)
+    public void AddItem(IItem item)
     {
         if (!item.IsMagical)
             _items.Add(item);
     }
 
-    public void RemoveItem(Item item)
+    public void RemoveItem(IItem item)
     {
         _items.Remove(item);
     }
@@ -27,7 +27,7 @@ public class Archer : ICharacter
     public int GetAttack()
     {
         int total = 0;
-        foreach (var item in items)
+        foreach (var item in _items)
         {
             if (item is AttackItem atk)
                 total += atk.Attack;
@@ -41,10 +41,10 @@ public class Archer : ICharacter
     public int GetArmor()
     {
         int total = 0;
-        foreach (var item in items)
+        foreach (var item in _items)
         {
-            if (item is AttackItem atk)
-                total += atk.Armor;
+            if (item is DefenceItem dfc)
+                total += dfc.Armor;
             if (item is HybridItem hyb)
                 total += hyb.Armor;
         }

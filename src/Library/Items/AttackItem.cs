@@ -1,5 +1,5 @@
 namespace Ucu.Poo.RoleplayGame;
-public class AttackItem
+public class AttackItem : IItem
 {
     private string _name;
     private int _attack;
@@ -15,23 +15,20 @@ public class AttackItem
     public string Name
     {
         get { return _name; }
-        set { _name = value; }
+    }
+
+    public bool IsMagical
+    {
+        get { return _isMagical; }
     }
 
     public int Attack
     {
         get { return _attack; }
-        set { _attack = value; }
-    }
-
-    public bool isMagical
-    {
-        get { return _isMagical; }
-        set { _isMagical = value; }
     }
 
     public override string ToString()
     {
-        return $"Name: {_name}, Attack: {_attack}, IsMagical: {_isMagical}";
+        return $"{Name} (attack: {Attack}, Mágico: {IsMagical})";
     }
 }

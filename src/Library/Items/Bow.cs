@@ -1,12 +1,9 @@
 namespace Ucu.Poo.RoleplayGame;
 
-public class Bow
+public class Bow : AttackItem
 {
-    public int AttackValue 
+    public Bow(string name, int attack, bool isMagical)
+        : base("bow", 15, false) 
     {
-        get
-        {
-            return 15;
-        } 
     }
 }

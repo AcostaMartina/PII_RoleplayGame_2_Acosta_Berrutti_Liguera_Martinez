@@ -1,20 +1,9 @@
 namespace Ucu.Poo.RoleplayGame;
 
-public class Spell
+public class Spell : HybridItem
 {
-    public int AttackValue
+    public Spell(string name, int armor, int attack, bool isMagical)
+        : base("spell", 70, 70, true) 
     {
-        get
-        {
-            return 70;
-        }
-    }
-
-    public int DefenseValue
-    {
-        get
-        {
-            return 70;
-        }
     }
 }

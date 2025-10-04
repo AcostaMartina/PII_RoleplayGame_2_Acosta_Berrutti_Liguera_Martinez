@@ -2,31 +2,42 @@ namespace Ucu.Poo.RoleplayGame;
 
 public class SpellsBook
 {
-    public Spell[] Spells { get; set; }
+    private List<Spell> _spells = new  List<Spell>();
     
-    public int AttackValue
+    
+    public int Attack
     {
         get
         {
             int value = 0;
-            foreach (Spell spell in this.Spells)
+            foreach (Spell spell in this._spells)
             {
-                value += spell.AttackValue;
+                value += spell.Attack;
             }
             return value;
         }
     }
 
-    public int DefenseValue
+    public int Armor
     {
         get
         {
             int value = 0;
-            foreach (Spell spell in this.Spells)
+            foreach (Spell spell in this._spells)
             {
-                value += spell.DefenseValue;
+                value += spell.Armor;
             }
             return value;
         }
+    }
+
+    public void AddSpell(Spell spell)
+    {
+        _spells.Add(spell);
+    }
+
+    public void RemoveSpell(Spell spell)
+    {
+        _spells.Remove(spell);
     }
 }
