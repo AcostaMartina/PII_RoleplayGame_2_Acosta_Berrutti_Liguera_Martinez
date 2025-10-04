@@ -25,11 +25,11 @@ public class HybridItem : IItem
         get { return _isMagical; }
     }
 
-    public int Armor
+    public virtual int Armor
     {
         get { return _armor; }
     }
-    public int Attack
+    public virtual int Attack
     {
         get { return _attack; }
     }
