@@ -1,6 +1,6 @@
-namespace Ucu.Poo.RoleplayGame;
+namespace Characters;
 
-public class Knight
+public class Knight : ICharacter
 {
     private int health = 100;
 
@@ -11,27 +11,46 @@ public class Knight
 
     public string Name { get; set; }
 
-    public Sword Sword { get; set; }
-
-    public Shield Shield { get; set; }
-
-    public Armor Armor { get; set; }
-
-    public int AttackValue
+    private List<Item> _items = new List<Item>();
+    
+    public void AddItem(Item item)
     {
-        get
-        {
-            return Sword.AttackValue;
-        }
+        if (!item.IsMagical)
+            _items.Add(item);
     }
 
-    public int DefenseValue
+    public void RemoveItem(Item item)
     {
-        get
-        {
-            return Armor.DefenseValue + Shield.DefenseValue;
-        }
+        _items.Remove(item);
     }
+
+    public int GetAttack()
+    {
+        int total = 0;
+        foreach (var item in items)
+        {
+            if (item is AttackItem atk)
+                total += atk.Attack;
+            if (item is HybridItem hyb)
+                total += hyb.Attack;
+        }
+        return total;
+    }
+
+
+    public int GetArmor()
+    {
+        int total = 0;
+        foreach (var item in items)
+        {
+            if (item is AttackItem atk)
+                total += atk.Armor;
+            if (item is HybridItem hyb)
+                total += hyb.Armor;
+        }
+        return total;
+    }
+
 
     public int Health
     {
@@ -45,15 +64,15 @@ public class Knight
         }
     }
 
-    public void ReceiveAttack(int power)
+    public void Damage(int power)
     {
-        if (this.DefenseValue < power)
+        if (this.GetArmor() < power)
         {
-            this.Health -= power - this.DefenseValue;
+            this.Health -= power - this.GetArmor();
         }
     }
 
-    public void Cure()
+    public void Heal()
     {
         this.Health = 100;
     }
