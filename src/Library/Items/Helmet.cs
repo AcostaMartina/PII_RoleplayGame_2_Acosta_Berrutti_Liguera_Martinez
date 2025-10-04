@@ -1,12 +1,10 @@
 namespace Ucu.Poo.RoleplayGame;
 
-public class Helmet
+
+public class Helmet : DefenceItem
 {
-    public int DefenseValue
+    public Helmet(string name, int armor, bool isMagical)
+        : base("armor", 18, false) 
     {
-        get
-        {
-            return 18;
-        }
     }
 }
