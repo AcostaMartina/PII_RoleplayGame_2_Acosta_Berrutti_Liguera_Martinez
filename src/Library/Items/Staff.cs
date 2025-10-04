@@ -1,20 +1,11 @@
-namespace Ucu.Poo.RoleplayGame;
-
-public class Staff
+namespace Ucu.Poo.RoleplayGame
 {
-    public int AttackValue 
+    public class Staff : HybridItem
     {
-        get
+        public Staff()
+            : base("Staff", armor: 100, attack: 100, isMagical: true)
         {
-            return 100;
-        } 
-    }
-
-    public int DefenseValue
-    {
-        get
-        {
-            return 100;
         }
     }
 }
+
