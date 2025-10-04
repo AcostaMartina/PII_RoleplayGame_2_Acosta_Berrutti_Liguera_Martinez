@@ -14,26 +14,24 @@ namespace LibraryTests
         private Armor _armor;
         private Helmet _helmet;
         private Shield _shield;
-        private Staff _staff; // mágico — no debe equiparse
-        private Spell _spell; // mágico — no debe equiparse
-        private SpellsBook _spellsBook; // mágico — no debe equiparse
+        private Staff _staff; 
+        private Spell _spell;
+        private SpellsBook _spellsBook; 
 
         [SetUp]
         public void Setup()
         {
             _archer = new Archer("Legolas");
 
-            // Ítems de ataque (no mágicos)
+
             _axe = new Axe("Axe", 25, false);
             _sword = new Sword("Sword", 20, false);
             _bow = new Bow("Bow", 15, false);
 
-            // Ítems de defensa (no mágicos)
             _armor = new Armor("Armor", 25, false);
             _helmet = new Helmet("Helmet", 18, false);
             _shield = new Shield("Shield", 14, false);
-
-            // Ítems mágicos (no deberían poder agregarse)
+            
             _staff = new Staff("Staff", 100, 100, true);
             _spell = new Spell("Fire", 70, 70, true);
             _spellsBook = new SpellsBook();
@@ -64,7 +62,7 @@ namespace LibraryTests
             _archer.AddItem(_spell);
             _archer.AddItem(_spellsBook);
 
-            // Como todos son mágicos, el ataque y la defensa deben ser 0
+           
             Assert.That(_archer.GetAttack(), Is.EqualTo(0));
             Assert.That(_archer.GetArmor(), Is.EqualTo(0));
         }
@@ -94,10 +92,10 @@ namespace LibraryTests
         [Test]
         public void Archer_ShouldReduceHealthWhenTakingDamage()
         {
-            _archer.AddItem(_shield); // defensa 14
+            _archer.AddItem(_shield); 
             int initialHealth = _archer.Health;
 
-            _archer.Damage(50); // daño recibido = 50 - 14 = 36
+            _archer.Damage(50); 
 
             Assert.That(_archer.Health, Is.EqualTo(initialHealth - (50 - _shield.Armor)));
         }
@@ -126,7 +124,7 @@ namespace LibraryTests
             _archer.AddItem(_axe);
             _archer.RemoveItem(_axe);
 
-            int expectedAttack = _bow.Attack; // solo queda el arco
+            int expectedAttack = _bow.Attack; 
 
             Assert.That(_archer.GetAttack(), Is.EqualTo(expectedAttack));
         }
