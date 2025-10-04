@@ -27,4 +27,9 @@ public class DefenceItem : IItem
     {
         get { return _armor; }
     }
+
+    public override string ToString()
+    {
+        return $"{Name} (Armor: {Armor}, Mágico: {IsMagical})";
+    }
 }
