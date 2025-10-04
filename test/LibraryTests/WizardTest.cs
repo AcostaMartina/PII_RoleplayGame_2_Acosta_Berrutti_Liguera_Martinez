@@ -131,4 +131,5 @@ namespace LibraryTests
             Assert.That(_wizard.GetArmor(), Is.EqualTo(0));
         }
     }
+    
 }
