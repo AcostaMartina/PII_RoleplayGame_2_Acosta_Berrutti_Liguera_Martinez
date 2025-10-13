@@ -1,48 +1,44 @@
-namespace Ucu.Poo.RoleplayGame
+using System.Collections.Generic;
+
+namespace Ucu.Poo.RoleplayGame;
+
+public class SpellsBook: IMagicalAttackItem, IMagicalDefenceItem
 {
-    public class SpellsBook : HybridItem
+    private List<ISpell> spells = new List<ISpell>();
+
+    public int AttackValue
     {
-        private List<Spell> _spells = new List<Spell>();
-
-        public SpellsBook()
-            : base("SpellBook", armor: 0, attack: 0, isMagical: true)
+        get
         {
-        }
-
-        public override int Attack
-        {
-            get
+            int value = 0;
+            foreach (ISpell spell in this.spells)
             {
-                int value = 0;
-                foreach (Spell spell in _spells)
-                {
-                    value += spell.Attack;
-                }
-                return value;
+                value += spell.AttackValue;
             }
+            return value;
         }
+    }
 
-        public override int Armor
+    public int DefenseValue
+    {
+        get
         {
-            get
+            int value = 0;
+            foreach (ISpell spell in this.spells)
             {
-                int value = 0;
-                foreach (Spell spell in _spells)
-                {
-                    value += spell.Armor;
-                }
-                return value;
+                value += spell.DefenseValue;
             }
+            return value;
         }
+    }
 
-        public void AddSpell(Spell spell)
-        {
-            _spells.Add(spell);
-        }
+    public void AddSpell(ISpell spell)
+    {
+        this.spells.Add(spell);
+    }
 
-        public void RemoveSpell(Spell spell)
-        {
-            _spells.Remove(spell);
-        }
+    public void RemoveSpell(ISpell spell)
+    {
+        this.spells.Remove(spell);
     }
 }

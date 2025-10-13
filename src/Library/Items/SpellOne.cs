@@ -1,12 +1,12 @@
 namespace Ucu.Poo.RoleplayGame;
 
-public class Staff: IAttackItem, IDefenceItem
+public class SpellOne: ISpell
 {
     public int AttackValue
     {
         get
         {
-            return 100;
+            return 70;
         }
     }
 
@@ -14,7 +14,7 @@ public class Staff: IAttackItem, IDefenceItem
     {
         get
         {
-            return 100;
+            return 70;
         }
     }
 }

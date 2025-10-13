@@ -1,30 +1,27 @@
-﻿using Ucu.Poo.RoleplayGame;
+﻿using System;
+namespace Ucu.Poo.RoleplayGame.Program;
+class Program
+{
+    static void Main(string[] args)
+    {
+        SpellsBook book = new SpellsBook();
+        book.AddSpell(new SpellOne());
+        book.AddSpell(new SpellOne());
 
-SpellsBook book = new SpellsBook();
-Spell spell = new Spell("spell", 70, 70, true);
-book.AddSpell(spell);
+        Wizard gandalf = new Wizard("Gandalf");
+        gandalf.AddItem(book);
 
-Wizard gandalf = new Wizard("Gandalf");
-Staff staff = new Staff("spell", 100, 100, true);
-gandalf.AddItem(staff);
+        Dwarf gimli = new Dwarf("Gimli");
 
-Dwarf gimli = new Dwarf("Gimli");
-Axe axe = new Axe("axe", 25, false);
-gimli.AddItem(axe);
-Helmet helmet = new Helmet("armor", 18, false);
-gimli.AddItem(helmet);
-Shield shield = new Shield("armor", 14, false);
-gimli.AddItem(shield);
+        Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
+        Console.WriteLine($"Gandalf attacks Gimli with ⚔️ {gandalf.AttackValue}");
 
+        gimli.ReceiveAttack(gandalf.AttackValue);
 
-Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
-Console.WriteLine($"Gandalf attacks Gimli with ⚔️ {gandalf.GetAttack()}");
+        Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
 
-gimli.Damage(gandalf.GetAttack());
+        gimli.Cure();
 
-Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
-
-gimli.Heal();
-
-Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
-
+        Console.WriteLine($"Someone cured Gimli. Gimli now has ❤️ {gimli.Health}");
+    }
+}

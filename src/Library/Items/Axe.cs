@@ -1,9 +1,11 @@
 namespace Ucu.Poo.RoleplayGame;
-
-public class Axe : AttackItem
+public class Axe: IAttackItem
 {
-    public Axe(string name, int attack, bool isMagical)
-        : base("axe", 25, false) 
+    public int AttackValue
     {
+        get
+        {
+            return 25;
+        }
     }
 }

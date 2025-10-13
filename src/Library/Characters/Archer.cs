@@ -1,56 +1,53 @@
+using System.Collections.Generic;
 namespace Ucu.Poo.RoleplayGame;
 
-public class Archer : ICharacter
+public class Archer: ICharacter
 {
     private int health = 100;
+
+    private List<IItem> items = new List<IItem>();
 
     public Archer(string name)
     {
         this.Name = name;
+
+        this.AddItem(new Bow());
+        this.AddItem(new Helmet());
     }
 
     public string Name { get; set; }
 
-    private List<IItem> _items = new List<IItem>();
-    
-    public void AddItem(IItem item)
+    public int AttackValue
     {
-        if (!item.IsMagical)
-            _items.Add(item);
-    }
-
-    public void RemoveItem(IItem item)
-    {
-        _items.Remove(item);
-    }
-
-    public int GetAttack()
-    {
-        int total = 0;
-        foreach (var item in _items)
+        get
         {
-            if (item is AttackItem atk)
-                total += atk.Attack;
-            if (item is HybridItem hyb)
-                total += hyb.Attack;
+            int value = 0;
+            foreach (IItem item in this.items)
+            {
+                if (item is IAttackItem)
+                {
+                    value += (item as IAttackItem).AttackValue;
+                }
+            }
+            return value;
         }
-        return total;
     }
 
-
-    public int GetArmor()
+    public int DefenseValue
     {
-        int total = 0;
-        foreach (var item in _items)
+        get
         {
-            if (item is DefenceItem dfc)
-                total += dfc.Armor;
-            if (item is HybridItem hyb)
-                total += hyb.Armor;
+            int value = 0;
+            foreach (IItem item in this.items)
+            {
+                if (item is IDefenceItem)
+                {
+                    value += (item as IDefenceItem).DefenseValue;
+                }
+            }
+            return value;
         }
-        return total;
     }
-
 
     public int Health
     {
@@ -64,17 +61,26 @@ public class Archer : ICharacter
         }
     }
 
-    
-    public void Damage(int power)
+    public void ReceiveAttack(int power)
     {
-        if (this.GetArmor() < power)
+        if (this.DefenseValue < power)
         {
-            this.Health -= power - this.GetArmor();
+            this.Health -= power - this.DefenseValue;
         }
     }
 
-    public void Heal()
+    public void Cure()
     {
         this.Health = 100;
+    }
+
+    public void AddItem(IItem item)
+    {
+        this.items.Add(item);
+    }
+
+    public void RemoveItem(IItem item)
+    {
+        this.items.Remove(item);
     }
 }
